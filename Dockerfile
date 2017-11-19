@@ -1,8 +1,15 @@
 FROM node:6.11.3
 
-RUN mkdir -p /data/app/bin && mkdir -p /data/app/scripts
+RUN mkdir -p /data/app/bin && \
+    mkdir -p /data/app/scripts && \
+    mkdir -p /etc/apt/apt.conf.d
 
-RUN apt-get -y update
+# If apt-get update fails and you are behind a proxy,
+# you can try uncommenting the next line to fix it.
+#ADD ./99fixbadproxy /etc/apt/apt.conf.d/99fixbadproxy
+
+RUN apt-get -y update && \
+    apt-get -y upgrade
 
 ADD ./bin /data/app/bin
 ADD ./scripts /data/app/scripts
