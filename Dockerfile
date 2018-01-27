@@ -8,8 +8,8 @@ RUN mkdir -p /data/app/bin && \
 # you can try uncommenting the next line to fix it.
 #ADD ./99fixbadproxy /etc/apt/apt.conf.d/99fixbadproxy
 
-RUN apt-get -y update && \
-    apt-get -y upgrade
+# Commented out for performance during class
+#RUN apt-get -y update && apt-get -y upgrade
 
 ADD ./bin /data/app/bin
 ADD ./scripts /data/app/scripts
