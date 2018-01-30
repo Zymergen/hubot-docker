@@ -21,14 +21,14 @@ module.exports = (robot) ->
   sidKey = parseInt(0)
 
   robot.respond /sid reset ([0-9\.]+)/i, (msg) ->
-    if robot.alias isnt "0"
+    if robot.alias isnt "0" && robot.alias isnt "0 "
       msg.send "This is not the correct bot. Ensure you are in the instructor room and type '0 sid get'."
     else
       sidKey = parseInt(msg.match[1])
       msg.send "Student ID base reset to #{sidKey}"
 
   robot.respond /sid get/i, (msg) ->
-    if robot.alias isnt "0"
+    if robot.alias isnt "0" && robot.alias isnt "0 "
       msg.send "This is not the correct bot. Ensure you are in the instructor room and type '0 sid get'."
     else
       sidKey = sidKey + 1
