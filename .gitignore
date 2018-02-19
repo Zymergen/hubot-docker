@@ -16,3 +16,9 @@ newrelic.js
 srbot.rake
 centurion-configs
 .env
+
+terraform/terraform.tfstate*
+terraform/.terraformmongodb/data/db/*
+bot-with-server/mongodb/data/db/*
+!bot-with-server/mongodb/data/db/.git_keep
+
