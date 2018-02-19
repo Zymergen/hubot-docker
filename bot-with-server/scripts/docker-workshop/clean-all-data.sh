@@ -8,17 +8,8 @@ echo "Are you sure this is what you want to do?"
 read -p "You must type 'yes' to confirm: " -r
 echo
 if [[ $REPLY == "yes" ]]; then
-  rm -rf ${BASE}/layout/mongodb/data/db/*
-  rm -rf ${BASE}/layout/rocketchat/data/uploads/*
-  rm -rf ${BASE}/layout/hubot/data/scripts/*
-  rm -rf ${BASE}/layout/postgres/data/data
-  rm -rf ${BASE}/layout/registry/data/docker
-  rm -rf ${BASE}/layout/jenkins/data/*
-  rm -rf ${BASE}/layout/jenkins/data/.groovy
-  rm -rf ${BASE}/layout/jenkins/data/.java
-  rm -rf ${BASE}/layout/gogs/data/git
-  rm -rf ${BASE}/layout/gogs/data/gogs
-  rm -rf ${BASE}/layout/gogs/data/ssh
+  rm -rf ${BASE}/hubot-docker/bot-with-server/mongodb/data/db/*
+  rm -rf ${BASE}/hubot-docker/bot-with-server/rocketchat/data/uploads/*
   echo "completed"
 else
   echo "aborted"
