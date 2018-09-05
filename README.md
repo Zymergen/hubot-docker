@@ -6,3 +6,12 @@ docker-hubot is a chat bot built on the [Hubot][hubot] framework. It was initial
 [generator-hubot]: https://github.com/github/generator-hubot
 
 
+Build a docker image with: 
+NOTE: replace 0.X.Y with the appropriate value which is generally 1 greater than the current version. 
+`docker build . -t artifactory.zymergen.net:6556/com.zymergen/hubot:latest -t artifactory.zymergen.net:6556/com.zymergen/hubot:0.X.Y`
+
+To push to artifactory:
+`docker push artifactory.zymergen.net:6556/com.zymergen/hubot `
+
+Note: you will need to be logged into artifactory for above. Also note that this is may change as we should update to using Jenkins as time permits. 
+

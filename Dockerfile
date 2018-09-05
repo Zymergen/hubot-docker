@@ -1,22 +1,46 @@
-FROM node:6.11.3
+# ------------------------------------------------------
+#                       Dockerfile
+# ------------------------------------------------------
+# image:    hubot
+# name:     zymergen/hubot
+# repo:     https://github.com/mind-doc/hubot
+# Requires: node:alpine
+# authors:  development@minddoc.com
+# ------------------------------------------------------
 
-RUN mkdir -p /data/app/bin && \
-    mkdir -p /data/app/scripts && \
-    mkdir -p /etc/apt/apt.conf.d
+FROM node:alpine
+LABEL maintainer="glonkarzymergen.com"
 
-# If apt-get update fails and you are behind a proxy,
-# you can try uncommenting the next line to fix it.
-#ADD ./99fixbadproxy /etc/apt/apt.conf.d/99fixbadproxy
+# Install hubot 3.x dependencies
+RUN apk update && apk upgrade \
+  && apk add redis jq \
+  && npm install -g yo generator-hubot@next \
+  && rm -rf /var/cache/apk/*
 
-# Commented out for performance during class
-#RUN apt-get -y update && apt-get -y upgrade
+# Create hubot user with privileges
+RUN addgroup -g 501 hubot \
+  && adduser -D -h /minddocbot -u 501 -G hubot hubot
+ENV HOME /minddocbot
+WORKDIR /minddocbot
+RUN chown -R hubot:hubot .
+USER hubot
 
-ADD ./bin /data/app/bin
-ADD ./scripts /data/app/scripts
-ADD ./*.json /data/app/
+# Install hubot
+ENV HUBOT_NAME zed
+ENV HUBOT_OWNER="Zymergen <software@zymergen.com>"
+ENV HUBOT_DESCRIPTION="A robot may not harm humanity, or, by inaction, allow humanity to come to harm"
+ENV HUBOT_SLACK_TOKEN="$SLACK_TOKEN"
+RUN yo hubot --adapter=slack --owner="$HUBOT_OWNER" --name="$HUBOT_NAME" --description="$HUBOT_DESCRIPTION" --defaults
+# Set up extra external scripts (what we consider "essentials")
 
-RUN cd /data/app && npm install
+ADD package.json ./
+RUN npm install
 
-WORKDIR /data/app
-CMD ["/data/app/bin/hubot-env"]
+COPY external-scripts.json ./
+RUN npm install --save $(jq -c -r '.[]' external-scripts.json | tr '\n' ' ')
+
+EXPOSE 80
+
+# Set up mandatory environment variables defaults
+ENTRYPOINT ["/bin/sh", "-c", "bin/hubot --name $HUBOT_NAME --adapter slack"]
 
