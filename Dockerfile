@@ -2,14 +2,14 @@
 #                       Dockerfile
 # ------------------------------------------------------
 # image:    hubot
-# name:     minddocdev/hubot
+# name:     zymergen/hubot
 # repo:     https://github.com/mind-doc/hubot
 # Requires: node:alpine
 # authors:  development@minddoc.com
 # ------------------------------------------------------
 
 FROM node:alpine
-LABEL maintainer="development@minddoc.com"
+LABEL maintainer="glonkarzymergen.com"
 
 # Install hubot 3.x dependencies
 RUN apk update && apk upgrade \
@@ -26,8 +26,8 @@ RUN chown -R hubot:hubot .
 USER hubot
 
 # Install hubot
-ENV HUBOT_NAME minddocbot
-ENV HUBOT_OWNER="MindDoc <development@minddoc.com>"
+ENV HUBOT_NAME zed
+ENV HUBOT_OWNER="Zymergen <software@zymergen.com>"
 ENV HUBOT_DESCRIPTION="A robot may not harm humanity, or, by inaction, allow humanity to come to harm"
 ENV HUBOT_SLACK_TOKEN="$SLACK_TOKEN"
 RUN yo hubot --adapter=slack --owner="$HUBOT_OWNER" --name="$HUBOT_NAME" --description="$HUBOT_DESCRIPTION" --defaults
