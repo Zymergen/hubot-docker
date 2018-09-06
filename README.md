@@ -49,7 +49,10 @@ to the next version i.e. one you have built:
 
 run: `kubectl apply -f hubot.yaml -n tools`
 
-Note: above assumes you ahve access to the `tools` namespace and are pointing to the `rancher2` cluster. 
+Note: above assumes you have access to the `tools` namespace and are pointing to the `rancher2` cluster. 
+
+https://wiki.zymergen.net/display/DEV/Set+up+kubectl+with+our+remote+clusters
+
 
 ## Developing custom scripts and/or testing locally. 
 
@@ -61,7 +64,22 @@ You can write a custom script. put it in the scripts folder.
 - set the `SLACK_TOKEN` ENV variable .. you can get this from Gajanan or Victor or Shannon 
 - run: `docker-compose up`
 -NOW YOU SHOULD SEE: hubot docker image running. 
-- invite the bot to a channel and test.      
+- invite the bot to a channel and test.  
+
+# For adding custom scripts to work on the container running in kubernetes see Readme at:
+
+https://github.com/Zymergen/drover/tree/master/kubectl/hubot
+
+# Package configurations. 
+
+If you are adding a package that needs confiruations/environment variables. These are set through secrets.
+
+Modify the kubernetes secret `hubot` in the `tools` namespace. Can be done through the `kubectl` command or by the `rancher2` UI. 
+
+ 
+
+
+
 
 
 
