@@ -39,10 +39,16 @@ Also note that this process is may change as we should update to using Jenkins a
 Now we need to make the hubot container use the latest image you have built `0.X.Y`
 
 edit: https://github.com/Zymergen/drover/blob/master/kubectl/hubot/hubot.yaml
-line: image: artifactory.zymergen.net:6556/com.zymergen/hubot:0.1.1
-to the next version i.e. one you have built: image: artifactory.zymergen.net:6556/com.zymergen/hubot:0.X.Y
+line: 
+
+`image: artifactory.zymergen.net:6556/com.zymergen/hubot:0.1.1`
+
+to the next version i.e. one you have built: 
+
+`image: artifactory.zymergen.net:6556/com.zymergen/hubot:0.X.Y`
 
 run: `kubectl apply -f hubot.yaml -n tools`
+
 Note: above assumes you ahve access to the `tools` namespace and are pointing to the `rancher2` cluster. 
 
 ## Developing custom scripts and/or testing locally. 
@@ -54,7 +60,7 @@ You can write a custom script. put it in the scripts folder.
 - Modify `docker-compose.yaml` to use image for mybot as `hubot-local`
 - set the `SLACK_TOKEN` ENV variable .. you can get this from Gajanan or Victor or Shannon 
 - run: `docker-compose up`
--NOW YOU SHOULS SEE: hubot docker image running. 
+-NOW YOU SHOULD SEE: hubot docker image running. 
 - invite the bot to a channel and test.      
 
 
