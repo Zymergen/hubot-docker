@@ -25,6 +25,12 @@ const config = {
   // this param is optional, but all options will be shown
   conversation: {
     lang: 'en-US', // defaults to en-US, but try other ones, it's fun!
+    deviceLocation: {
+      coordinates: { // set the latitude and longitude of the device
+        latitude: 37.8414061,
+        longitude: -122.29108489,
+      },
+    },
   },
 };
 let assistant;
