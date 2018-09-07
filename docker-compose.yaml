@@ -3,7 +3,7 @@ services:
   mybot:
     build:
       context: "."
-    image: "hubot-docker:latest"
+    image: "artifactory.zymergen.net:6556/com.zymergen/hubot:latest"
     environment:
       BIND_ADDRESS: "0.0.0.0"
       ENVIRONMENT: "development"
@@ -18,6 +18,8 @@ services:
       HUBOT_LOG_LEVEL: "debug"
       REDIS_URL: "redis://redis:6379"
       HUBOT_SLACK_TOKEN: "${SLACK_TOKEN}"
+      HUBOT_ASSISTANT_SECRET: "./google-assistant-secret.json"
+      HUBOT_ASSISTANT_TOKEN: "./google-assistant-token.json"
       RESPOND_TO_DM: "true"
       LISTEN_ON_ALL_PUBLIC: "true"
     ports:

@@ -8,8 +8,16 @@
 # authors:  development@minddoc.com
 # ------------------------------------------------------
 
-FROM node:alpine
+FROM node:8.11.4-alpine
 LABEL maintainer="glonkarzymergen.com"
+
+RUN apk add --update \
+    python \
+    python-dev \
+    py-pip \
+    build-base \
+  && pip install virtualenv 
+
 
 # Install hubot 3.x dependencies
 RUN apk update && apk upgrade \
@@ -32,6 +40,8 @@ ENV HUBOT_DESCRIPTION="A robot may not harm humanity, or, by inaction, allow hum
 ENV HUBOT_SLACK_TOKEN="$SLACK_TOKEN"
 RUN yo hubot --adapter=slack --owner="$HUBOT_OWNER" --name="$HUBOT_NAME" --description="$HUBOT_DESCRIPTION" --defaults
 # Set up extra external scripts (what we consider "essentials")
+
+ADD ./scripts ./scripts
 
 ADD package.json ./
 RUN npm install
