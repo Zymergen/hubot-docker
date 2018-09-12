@@ -1,13 +1,14 @@
 //
 // Description:
-//   wiki
+//   status
 //
 // Dependencies:
 //   None
 //
 // Commands:
-//   wiki
-//   wiki search <thing>
+//   is lims up
+//   is lims down
+//   zed status lims
 //
 //
 module.exports = function (robot) {
